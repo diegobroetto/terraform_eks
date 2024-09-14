@@ -6,7 +6,7 @@ resource "aws_subnet" "eks_subnet_priv_1a" {
   tags = merge(
     local.tags,
     {
-      Name                              = "${var.project_name}subnet-priv-1a"
+      Name                              = "${var.project_name}-subnet-priv-1a"
       "kubernetes.io/role/internal-elb" = 1
     }
   )

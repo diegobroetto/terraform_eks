@@ -13,11 +13,6 @@ resource "aws_subnet" "eks_subnet_pub_1a" {
   )
 }
 
-resource "aws_route_table_association" "rt_assoc_a" {
-  subnet_id      = aws_subnet.eks_subnet_pub_1a.id
-  route_table_id = aws_route_table.rt_public.id
-}
-
 resource "aws_subnet" "eks_subnet_pub_1b" {
   vpc_id                  = aws_vpc.vpc_eks.id
   cidr_block              = cidrsubnet(var.cidr_block, 8, 2)
@@ -33,7 +28,12 @@ resource "aws_subnet" "eks_subnet_pub_1b" {
   )
 }
 
-resource "aws_route_table_association" "rt_assoc_b" {
+resource "aws_route_table_association" "rt_assoc_pub_1a" {
+  subnet_id      = aws_subnet.eks_subnet_pub_1a.id
+  route_table_id = aws_route_table.rt_public.id
+}
+
+resource "aws_route_table_association" "rt_assoc_pub_1b" {
   subnet_id      = aws_subnet.eks_subnet_pub_1b.id
   route_table_id = aws_route_table.rt_public.id
 }

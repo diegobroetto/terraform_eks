@@ -1,7 +1,7 @@
 resource "aws_eip" "ngw_eip_1a" {
   domain = "standard"
   tags = merge(
-    local.tags,
+    var.tags,
     {
       Name = "${var.project_name}-ngw-eip-1a"
     }
@@ -11,7 +11,7 @@ resource "aws_eip" "ngw_eip_1a" {
 resource "aws_eip" "ngw_eip_1b" {
   domain = "standard"
   tags = merge(
-    local.tags,
+    var.tags,
     {
       Name = "${var.project_name}-ngw-eip-1b"
     }
@@ -23,7 +23,7 @@ resource "aws_nat_gateway" "ngw_1a" {
   subnet_id     = aws_subnet.eks_subnet_pub_1a.id
 
   tags = merge(
-    local.tags,
+    var.tags,
     {
       Name = "${var.project_name}-ngw-1a"
     }
@@ -37,7 +37,7 @@ resource "aws_nat_gateway" "ngw_1b" {
   subnet_id     = aws_subnet.eks_subnet_pub_1b.id
 
   tags = merge(
-    local.tags,
+    var.tags,
     {
       Name = "${var.project_name}-ngw-1b"
     }

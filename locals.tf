@@ -5,4 +5,5 @@ locals {
     Project      = "EKS"
     Environment  = "DEV"
   }
+
 }

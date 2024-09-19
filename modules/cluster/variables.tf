@@ -18,3 +18,4 @@ variable "public_subnet_1b" {
   type        = string
   description = "Public Subnet to create a EKS Cluster AZ 1b"
 }
+

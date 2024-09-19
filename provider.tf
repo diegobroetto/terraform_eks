@@ -13,15 +13,11 @@ terraform {
       version = "2.15.0"
     }
   }
-  backend "s3" {
-    bucket = "terraform-eks-diego"
-    key    = "terraform_eks"
-    region = "us-east-1"
-  }
+
 }
 
 provider "aws" {
-  region = "us-east-1"
+  region = var.region
 }
 
 provider "kubernetes" {

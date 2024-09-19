@@ -14,3 +14,13 @@ variable "instance_types" {
   description = "List of EC2 Instance Types for Nodes"
   default     = ["t3.medium"]
 }
+
+variable "region" {
+  type        = string
+  description = "AWS Region to create your project"
+}
+
+variable "tags" {
+  type        = map(any)
+  description = "A map of tags to add to all  resources"
+}

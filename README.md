@@ -32,6 +32,8 @@ No resources.
 | <a name="input_cidr_block"></a> [cidr\_block](#input\_cidr\_block) | Networking CIDR block to be used for the VPC | `string` | n/a | yes |
 | <a name="input_instance_types"></a> [instance\_types](#input\_instance\_types) | List of EC2 Instance Types for Nodes | `list(string)` | <pre>[<br/>  "t3.medium"<br/>]</pre> | no |
 | <a name="input_project_name"></a> [project\_name](#input\_project\_name) | Project name to be used to name de resources (Name Tag) | `string` | n/a | yes |
+| <a name="input_region"></a> [region](#input\_region) | AWS Region to create your project | `string` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to add to all  resources | `map(any)` | n/a | yes |
 
 ## Outputs
 

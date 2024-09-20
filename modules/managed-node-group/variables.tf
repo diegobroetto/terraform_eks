@@ -27,5 +27,4 @@ variable "private_subnet_1b" {
 variable "instance_types" {
   type        = list(string)
   description = "List of permitted types of instances"
-  default     = ["t3.medium"]
 }

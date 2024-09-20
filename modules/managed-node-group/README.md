@@ -7,7 +7,7 @@ No requirements.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.68.0 |
 
 ## Modules
 
@@ -28,7 +28,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | EKS cluster name to create de MNG | `string` | n/a | yes |
-| <a name="input_instance_types"></a> [instance\_types](#input\_instance\_types) | List of permitted types of instances | `list(string)` | <pre>[<br/>  "t3.medium"<br/>]</pre> | no |
+| <a name="input_instance_types"></a> [instance\_types](#input\_instance\_types) | List of permitted types of instances | `list(string)` | n/a | yes |
 | <a name="input_private_subnet_1a"></a> [private\_subnet\_1a](#input\_private\_subnet\_1a) | Private Subnet to create a EKS Cluster AZ 1a | `string` | n/a | yes |
 | <a name="input_private_subnet_1b"></a> [private\_subnet\_1b](#input\_private\_subnet\_1b) | Private Subnet to create a EKS Cluster AZ 1b | `string` | n/a | yes |
 | <a name="input_project_name"></a> [project\_name](#input\_project\_name) | Project name to be used to name de resources (Name Tag) | `string` | n/a | yes |

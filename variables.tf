@@ -12,7 +12,7 @@ variable "project_name" {
 variable "instance_types" {
   type        = list(string)
   description = "List of EC2 Instance Types for Nodes"
-  default     = ["t3.medium"]
+  default     = ["t3.large"]
 }
 
 variable "region" {
@@ -23,4 +23,10 @@ variable "region" {
 variable "tags" {
   type        = map(any)
   description = "A map of tags to add to all resources"
+}
+
+variable "kubernetes_version" {
+  type        = string
+  default     = "1.30"
+  description = "The Kubernetes version to our cluster"
 }

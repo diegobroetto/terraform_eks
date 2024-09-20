@@ -19,3 +19,7 @@ variable "public_subnet_1b" {
   description = "Public Subnet to create a EKS Cluster AZ 1b"
 }
 
+variable "kubernetes_version" {
+  type        = string
+  description = "The Kubernetes version to our cluster"
+}

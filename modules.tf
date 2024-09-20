@@ -6,11 +6,12 @@ module "eks_network" {
 }
 
 module "eks_cluster" {
-  source           = "./modules/cluster"
-  project_name     = var.project_name
-  tags             = var.tags
-  public_subnet_1a = module.eks_network.subnet_pub_1a.id
-  public_subnet_1b = module.eks_network.subnet_pub_1b.id
+  source             = "./modules/cluster"
+  project_name       = var.project_name
+  tags               = var.tags
+  kubernetes_version = var.kubernetes_version
+  public_subnet_1a   = module.eks_network.subnet_pub_1a.id
+  public_subnet_1b   = module.eks_network.subnet_pub_1b.id
 }
 
 module "eks_managed_node_group" {

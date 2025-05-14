@@ -1,51 +1,99 @@
-# terraform_eks
-<!-- BEGIN_TF_DOCS -->
-## Requirements
+# 🚀 Terraform EKS
 
-| Name | Version |
-|------|---------|
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.0 |
-| <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.15.0 |
-| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.32.0 |
+Este projeto provisiona um cluster Kubernetes completo na AWS usando o EKS (Elastic Kubernetes Service), com suporte a grupos de nós gerenciados, rede dedicada e controlador de Load Balancer.
 
-## Providers
+---
 
-No providers.
+## 🧱 Estrutura do Projeto
 
-## Modules
+O projeto utiliza módulos organizados da seguinte forma:
 
-| Name | Source | Version |
-|------|--------|---------|
-| <a name="module_eks_aws_load_balancer_controller"></a> [eks\_aws\_load\_balancer\_controller](#module\_eks\_aws\_load\_balancer\_controller) | ./modules/aws-load-balancer-controler | n/a |
-| <a name="module_eks_cluster"></a> [eks\_cluster](#module\_eks\_cluster) | ./modules/cluster | n/a |
-| <a name="module_eks_managed_node_group"></a> [eks\_managed\_node\_group](#module\_eks\_managed\_node\_group) | ./modules/managed-node-group | n/a |
-| <a name="module_eks_network"></a> [eks\_network](#module\_eks\_network) | ./modules/network | n/a |
+- **`eks_cluster`** – Cria o cluster EKS.
+- **`eks_managed_node_group`** – Provisiona grupos de nós gerenciados.
+- **`eks_network`** – Cria a VPC e subnets necessárias.
+- **`eks_aws_load_balancer_controller`** – Instala o controlador de Load Balancer via Helm.
 
-## Resources
+---
 
-No resources.
+## 📦 Requisitos
 
-## Inputs
+| Nome       | Versão mínima |
+|------------|----------------|
+| AWS        | >= 5.0         |
+| Helm       | >= 2.15.0      |
+| Kubernetes | >= 2.3.2       |
 
-| Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
-| <a name="input_cidr_block"></a> [cidr\_block](#input\_cidr\_block) | Networking CIDR block to be used for the VPC | `string` | n/a | yes |
-| <a name="input_instance_types"></a> [instance\_types](#input\_instance\_types) | List of EC2 Instance Types for Nodes | `list(string)` | <pre>[<br/>  "t3.large"<br/>]</pre> | no |
-| <a name="input_kubernetes_version"></a> [kubernetes\_version](#input\_kubernetes\_version) | The Kubernetes version to our cluster | `string` | `"1.30"` | no |
-| <a name="input_project_name"></a> [project\_name](#input\_project\_name) | Project name to be used to name de resources (Name Tag) | `string` | n/a | yes |
-| <a name="input_region"></a> [region](#input\_region) | AWS Region to create your project | `string` | n/a | yes |
-| <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to add to all resources | `map(any)` | n/a | yes |
+Certifique-se de que seu ambiente possui o Terraform e os plugins compatíveis.
 
-## Outputs
+---
 
-| Name | Description |
-|------|-------------|
-| <a name="output_certificate_authority"></a> [certificate\_authority](#output\_certificate\_authority) | n/a |
-| <a name="output_eks_vpc_config"></a> [eks\_vpc\_config](#output\_eks\_vpc\_config) | n/a |
-| <a name="output_endpoint"></a> [endpoint](#output\_endpoint) | n/a |
-| <a name="output_oidc"></a> [oidc](#output\_oidc) | n/a |
-| <a name="output_subnet_priv_1a"></a> [subnet\_priv\_1a](#output\_subnet\_priv\_1a) | n/a |
-| <a name="output_subnet_priv_1b"></a> [subnet\_priv\_1b](#output\_subnet\_priv\_1b) | n/a |
-| <a name="output_subnet_pub_1a"></a> [subnet\_pub\_1a](#output\_subnet\_pub\_1a) | n/a |
-| <a name="output_subnet_pub_1b"></a> [subnet\_pub\_1b](#output\_subnet\_pub\_1b) | n/a |
-<!-- END_TF_DOCS -->
+## ⚙️ Inputs
+
+| Nome               | Descrição                                             | Tipo           | Default         | Obrigatório |
+|--------------------|-------------------------------------------------------|----------------|------------------|-------------|
+| `cidr_block`       | Bloco CIDR da VPC                                     | `string`       | n/a              | ✅           |
+| `instance_types`   | Lista de tipos de instância EC2 para os nós          | `list(string)` | `["t3.large"]`   | ❌           |
+| `kubernetes_version` | Versão do Kubernetes                                | `string`       | `"1.30"`         | ❌           |
+| `project_name`     | Nome do projeto (usado como prefixo em recursos)     | `string`       | n/a              | ✅           |
+| `region`           | Região AWS onde o cluster será criado                | `string`       | n/a              | ✅           |
+| `tags`             | Mapa de tags aplicadas a todos os recursos           | `map(any)`     | n/a              | ✅           |
+
+---
+
+## 📤 Outputs
+
+| Nome                  | Descrição                          |
+|-----------------------|------------------------------------|
+| `certificate_authority` | Autoridade do cluster             |
+| `eks_vpc_config`        | Configurações da VPC do EKS       |
+| `endpoint`              | Endpoint do cluster               |
+| `oidc`                  | OIDC Provider URL do cluster      |
+| `subnet_priv_1a`        | Subnet privada 1a                 |
+| `subnet_priv_1b`        | Subnet privada 1b                 |
+| `subnet_pub_1a`         | Subnet pública 1a                 |
+| `subnet_pub_1b`         | Subnet pública 1b                 |
+
+---
+
+## ▶️ Como usar
+
+1. Clone o repositório:
+```bash
+git clone https://github.com/seu-usuario/terraform_eks.git
+cd terraform_eks
+```
+
+2. Inicialize o Terraform:
+```bash
+terraform init
+```
+
+3. Crie um arquivo `terraform.tfvars` com os valores desejados:
+```hcl
+project_name     = "meu-projeto"
+region           = "us-east-1"
+cidr_block       = "10.0.0.0/16"
+tags             = {
+  Owner = "Diego"
+  Environment = "Dev"
+}
+```
+
+4. Aplique o plano:
+```bash
+terraform apply
+```
+
+---
+
+## 📝 Observações
+
+- O cluster é provisionado com suporte a OIDC, facilitando a integração com IRSA.
+- O ALB Controller é implantado via Helm, utilizando o `aws-load-balancer-controller`.
+
+---
+
+## 📚 Referências
+
+- [Documentação Oficial do EKS](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html)
+- [Terraform AWS Provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs)
